@@ -1,0 +1,9 @@
+---
+- name: install iptables.sh
+  template: src=iptables.sh dest=/etc/iptables.sh mode=744
+ 
+# - name: make sure iptables.sh is in rc.local
+#   action: lineinfile dest=/etc/rc.local insertafter="^#" regexp="/etc/iptables.sh" line="/etc/iptables.sh" state=present
+
+# - name: run iptables.sh
+#   command: /etc/iptables.sh

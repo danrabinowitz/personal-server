@@ -21,9 +21,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.memory = 896 # This is 7/8 of a gig of ram
   end
 
-  config.vm.provision :host_shell do |host_shell|
-    host_shell.inline = "ansible-galaxy install -r requirements.yml --force"
-  end
+#  config.vm.provision :host_shell do |host_shell|
+#    host_shell.inline = "ansible-galaxy install -r requirements.yml --force"
+#  end
 
   config.vm.provision "ansible" do |ansible|
       ansible.playbook = "playbook.yml"
