@@ -1,5 +1,6 @@
 - hosts: all
   roles:
-    - { role: danrabinowitz.openvpn_for_access, sudo: yes }
-    - { role: firewall, sudo: yes }
+    - { role: iptables_d, sudo: yes }
+    # - { role: danrabinowitz.openvpn_for_access, sudo: yes }
+    # - { role: firewall, sudo: yes }
 # TODO: IPTABLES - Lock it down. This is done in the openvpn_for_access role

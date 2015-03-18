@@ -1,0 +1,26 @@
+---
+# This creates iptables.d and the main iptables_d shell script.
+
+- name: Ensure the iptables.d directory exists
+  file: path=/etc/iptables.d/ state=directory owner=root group=root mode=0700
+
+- name: Install the iptables_d.sh shell script
+  template: src=iptables_d.sh dest=/etc/iptables_d.sh owner=root group=root mode=0544
+
+
+
+# Install default rules
+- name: Install default rules
+  copy: src=etc/iptables.d/ dest=/etc/iptables.d/ owner=root group=root mode=0400
+
+
+
+- name: Run iptables_d.sh
+  # TODO: Update this to make it skippable if a variable is set. This would
+  # allow a user to install additional iptables_d/ scripts before running, to
+  # avoid locking themselves out.
+  command: /etc/iptables_d.sh
+
+- name: Run iptables_d_load from rc.local
+  # TODO: Fix the regexp
+  lineinfile: dest=/etc/rc.local insertafter="^#" regexp="^/sbin/iptables-restore < /etc/iptables-rules" line="/sbin/iptables-restore < /etc/iptables-rules" state=present
