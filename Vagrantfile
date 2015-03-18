@@ -45,8 +45,8 @@ You can then ssh into the newly-provisioned machine through the OpenVPN tunnel w
 ssh -i .vagrant/machines/default/virtualbox/private_key vagrant@10.7.1.1
 eof
 
-  config.vm.provision :host_shell do |host_shell|
-    host_shell.inline = "echo #{Shellwords.escape(completion_message1)}"
-  end
+  # config.vm.provision :host_shell do |host_shell|
+  #   host_shell.inline = "echo #{Shellwords.escape(completion_message1)}"
+  # end
 
 end

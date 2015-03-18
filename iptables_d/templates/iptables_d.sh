@@ -12,7 +12,10 @@ IPT="/sbin/iptables"
 PUBLIC_INT=`ip route get 8.8.8.8|head -1|cut -d' ' -f 5`
 
 # TODO: Does the Private interface exist at this point? Not a big deal, because
-# we won't be highly restrictive on the private interface.
+# we won't be highly restrictive on the private interface. This interface should
+# be what traffic coming over OpenVPN uses. Ideally it would be locked down to
+# just essential traffic. But it's not a big deal because only trusted machines
+# should be on the OpenVPN network anyway.
 PRIVATE_INT=`ip route show|grep '^{{ openvpn_subnet }}'|cut -d ' ' -f 5`
 
 echo "Public interface:  ${PUBLIC_INT}"
