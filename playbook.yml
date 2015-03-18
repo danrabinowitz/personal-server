@@ -3,4 +3,10 @@
     - { role: iptables_d, sudo: yes }
     # - { role: danrabinowitz.openvpn_for_access, sudo: yes }
     # - { role: firewall, sudo: yes }
-# TODO: IPTABLES - Lock it down. This is done in the openvpn_for_access role
+
+# TODO: Get the openvpn_for_access role working with iptables_d. This involves
+# making the easynat stuff an iptables_d script.
+# Then, enable ssh over openvpn.
+# Finally, disable ssh over public interface
+
+# What else do we want to allow? Ping? ssh to other servers?
