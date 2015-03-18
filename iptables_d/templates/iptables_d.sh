@@ -4,11 +4,14 @@
 # This script saves the rules to /etc/iptables-rules, so that on system startup,
 # the rules can be restored quickly from /etc/iptables-rules.
 
+IPTABLES_LOG_PREFIX='IPTABLES'
+
 IPT="/sbin/iptables"
 
 # TODO: There can be more than one public interface. In a Vagrant VM, or on EC2,
 # for example. How do we want to address this?
-# PUBLIC_INT=`ip route show|grep 'src {{ openvpn_server_ip }}' | cut -d' ' -f 3`
+HOST_IP_FOR_PROVISIONING={{ host_ip_for_provisioning.stdout }}
+PROVISIONING_PUBLIC_INT=`ip route get ${HOST_IP_FOR_PROVISIONING}|head -1|cut -d' ' -f 3`
 PUBLIC_INT=`ip route get 8.8.8.8|head -1|cut -d' ' -f 5`
 
 # TODO: Does the Private interface exist at this point? Not a big deal, because
@@ -16,10 +19,11 @@ PUBLIC_INT=`ip route get 8.8.8.8|head -1|cut -d' ' -f 5`
 # be what traffic coming over OpenVPN uses. Ideally it would be locked down to
 # just essential traffic. But it's not a big deal because only trusted machines
 # should be on the OpenVPN network anyway.
-PRIVATE_INT=`ip route show|grep '^{{ openvpn_subnet }}'|cut -d ' ' -f 5`
+# PRIVATE_INT=`ip route show|grep '^{{ openvpn_subnet }}'|cut -d ' ' -f 5`
 
 echo "Public interface:  ${PUBLIC_INT}"
-echo "Private interface: ${PRIVATE_INT}"
+echo "Provisioning public interface:  ${PROVISIONING_PUBLIC_INT}"
+# echo "Private interface: ${PRIVATE_INT}"
 
 shopt -s nullglob
 

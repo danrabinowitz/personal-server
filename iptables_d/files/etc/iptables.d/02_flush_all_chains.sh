@@ -2,4 +2,4 @@
 $IPT -F
 
 # Delete all chains, except the defaults: INPUT, FORWARD, and OUTPUT.
-$IPT -F
+$IPT -X
