@@ -6,6 +6,8 @@
     - { role: enable_ssh_over_openvpn, sudo: yes }
     - { role: cleanup, sudo: yes }
 
-# What else do we want to allow? Ping? ssh to other servers?
 # Create djr account? Update ssh config with an ~/.ssh/config.d/ entry?
 # Fix private key to use my real one. Is it using an insecure one now?
+# EC2
+# What else do we want to allow? Ping? ssh to other servers?
+# TODO: Make Dropwall not log traffic. Also do not log ssh attempts
