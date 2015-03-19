@@ -32,9 +32,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       merge_if_present(ansible.extra_vars, REQUIRED_ANSIBLE_EXTRA_VARS + ANSIBLE_EXTRA_VARS)
   end
 
-  # Remove temporary iptables rule which is needed only to avoid hanging when enabling iptables in ansible
-  config.vm.provision "shell", inline: "rm /etc/iptables.d/11_temporary_hack_for_provisioning.sh && /etc/iptables_d.sh"
-
   completion_message1 = <<-eof
 The server is provisioned. Further, your client openvpn config file has been saved to your /tmp directory, along with .crt and .key files. If you are using a
 standard OpenVPN install, executing the following command will move these files into place:

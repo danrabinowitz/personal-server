@@ -1,12 +1,9 @@
 - hosts: all
   roles:
     - { role: iptables_d, sudo: yes }
-    - { role: custom_iptables_rules, sudo: yes }
+    - { role: custom_iptables_rules_1, sudo: yes }
     - { role: danrabinowitz.openvpn_for_access, sudo: yes }
-    # - { role: move_ssh_to_openvpn, sudo: yes }
-
-# TODO: Get the openvpn_for_access role working with iptables_d.
-# Then, enable ssh over openvpn.
-# Finally, disable ssh over public interface
+    - { role: enable_ssh_over_openvpn, sudo: yes }
+    - { role: cleanup, sudo: yes }
 
 # What else do we want to allow? Ping? ssh to other servers?

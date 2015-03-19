@@ -1,0 +1,6 @@
+---
+- name: Create cleanup script
+  copy: src=cleanup.sh dest=/tmp/cleanup.sh owner=root group=root mode=0500
+
+- name: Remove iptables rules needed for provisioning
+  command: nohup /tmp/cleanup.sh
