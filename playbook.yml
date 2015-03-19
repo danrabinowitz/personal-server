@@ -7,3 +7,5 @@
     - { role: cleanup, sudo: yes }
 
 # What else do we want to allow? Ping? ssh to other servers?
+# Create djr account? Update ssh config with an ~/.ssh/config.d/ entry?
+# Fix private key to use my real one. Is it using an insecure one now?
