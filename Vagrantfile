@@ -21,9 +21,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.memory = 896 # This is 7/8 of a gig of ram
   end
 
-#  config.vm.provision :host_shell do |host_shell|
-#    host_shell.inline = "ansible-galaxy install -r requirements.yml --force"
-#  end
+ config.vm.provision :host_shell do |host_shell|
+   host_shell.inline = "ansible-galaxy install -r requirements.yml --force"
+ end
 
   config.vm.provision "ansible" do |ansible|
       ansible.playbook = "playbook.yml"
@@ -48,8 +48,8 @@ You can then ssh into the newly-provisioned machine through the OpenVPN tunnel w
 ssh -i .vagrant/machines/default/virtualbox/private_key vagrant@10.7.1.1
 eof
 
-  # config.vm.provision :host_shell do |host_shell|
-  #   host_shell.inline = "echo #{Shellwords.escape(completion_message1)}"
-  # end
+  config.vm.provision :host_shell do |host_shell|
+    host_shell.inline = "echo #{Shellwords.escape(completion_message1)}"
+  end
 
 end

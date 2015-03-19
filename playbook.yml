@@ -1,11 +1,11 @@
 - hosts: all
   roles:
     - { role: iptables_d, sudo: yes }
-    # - { role: danrabinowitz.openvpn_for_access, sudo: yes }
-    # - { role: firewall, sudo: yes }
+    - { role: custom_iptables_rules, sudo: yes }
+    - { role: danrabinowitz.openvpn_for_access, sudo: yes }
+    # - { role: move_ssh_to_openvpn, sudo: yes }
 
-# TODO: Get the openvpn_for_access role working with iptables_d. This involves
-# making the easynat stuff an iptables_d script.
+# TODO: Get the openvpn_for_access role working with iptables_d.
 # Then, enable ssh over openvpn.
 # Finally, disable ssh over public interface
 
