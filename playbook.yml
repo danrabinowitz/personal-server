@@ -2,12 +2,15 @@
   roles:
     - { role: iptables_d, sudo: yes }
     - { role: custom_iptables_rules_1, sudo: yes }
+    # Update apt and upgrade all apt packages
     - { role: danrabinowitz.openvpn_for_access, sudo: yes }
     - { role: enable_ssh_over_openvpn, sudo: yes }
     - { role: cleanup, sudo: yes }
 
 # Create djr account? Update ssh config with an ~/.ssh/config.d/ entry?
 # Fix private key to use my real one. Is it using an insecure one now?
+# Add apticron
+# Check my Evernote list to see what else I normall add to my servers.
 # EC2
 # What else do we want to allow? Ping? ssh to other servers?
 # TODO: Make Dropwall not log traffic. Also do not log ssh attempts
