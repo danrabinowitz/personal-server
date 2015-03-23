@@ -1,0 +1,26 @@
+---
+# From http://www.daveperrett.com/articles/2013/03/19/setting-up-sendmail-with-sendgrid-on-ubuntu/
+- name: Ensure FQHN is in /etc/hosts
+  shell: echo "127.0.0.1 $(hostname).localdomain $(hostname)" >> /etc/hosts
+
+- name: Install sendmail packages
+  apt: pkg={{ item }} state=installed
+  with_items:
+  - sendmail
+  - sendmail-cf
+  - heirloom-mailx
+
+- name: Copy setup script
+  copy: src=sendgrid_sendmail_setup.sh dest=/tmp/sendgrid_sendmail_setup.sh owner=root group=root mode=0700
+
+- name: Run the setup script
+  command: /tmp/sendgrid_sendmail_setup.sh
+
+- name: Add SendGrid details to access
+  lineinfile: dest=/etc/mail/access regexp='smtp.sendgrid.net' insertafter="EOF" line='AuthInfo:smtp.sendgrid.net "U:{{ sendgrid_username }}" "P:{{ sendgrid_password }}" "M:PLAIN"'
+
+- name: Update access.db
+  shell: makemap hash /etc/mail/access.db < /etc/mail/access
+
+- name: Restart sendmail
+  service: name=sendmail state=restarted

@@ -26,3 +26,12 @@
 - name: Run iptables_d_load from rc.local
   # TODO: Fix the regexp
   lineinfile: dest=/etc/rc.local insertafter="^#" regexp="^/sbin/iptables-restore < /etc/iptables-rules" line="/sbin/iptables-restore < /etc/iptables-rules" state=present
+
+- name: Log iptables messages to a dedicated log file
+  copy: src=etc/rsyslog.d/10-iptables.conf dest=/etc/rsyslog.d/ owner=root group=root mode=0644
+
+- name: Restart rsyslog
+  service: name=rsyslog state=restarted
+
+- name: Rotate newly-created iptables log
+  copy: src=etc/logrotate.d/iptables dest=/etc/logrotate.d/ owner=root group=root mode=0644

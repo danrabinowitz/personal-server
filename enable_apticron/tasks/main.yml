@@ -1,0 +1,6 @@
+---
+- name: Install apticon
+  apt: pkg=apticron state=installed
+
+- name: Update apticron config
+  lineinfile: dest=/etc/apticron/apticron.conf regexp='^EMAIL=' line='EMAIL="rabinowitz.dan@gmail.com"'
