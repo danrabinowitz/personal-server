@@ -4,3 +4,5 @@
 
 - name: Remove iptables rules needed for provisioning
   command: nohup /tmp/cleanup.sh
+
+# TODO: Try having the /tmp/cleanup.sh script remove itself. It SHOULD work.
