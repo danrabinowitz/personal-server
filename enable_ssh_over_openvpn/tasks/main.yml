@@ -2,5 +2,11 @@
 - name: Install rules
   copy: src=etc/iptables.d/ dest=/etc/iptables.d/ owner=root group=root mode=0400
 
+- wait_for: path=/proc/net/dev search_regex=tun0
+
 - name: Run iptables_d.sh
   command: /etc/iptables_d.sh
+  register: iptables_d_sh_out
+
+# - debug: var=iptables_d_sh_out
+- debug: var=iptables_d_sh_out.stdout_lines
