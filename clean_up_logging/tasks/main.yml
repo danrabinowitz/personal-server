@@ -1,0 +1,9 @@
+---
+- name: Remove cron logs from syslog
+  lineinfile: dest=/etc/rsyslog.d/50-default.conf regexp='^\*\.\*\;auth,authpriv\.none' line='*.*;cron,auth,authpriv.none     -/var/log/syslog'
+
+- name: Add cron logs from dedicated log file
+  lineinfile: dest=/etc/rsyslog.d/50-default.conf regexp='\#cron\.\*' line='cron.*                          /var/log/cron.log'
+
+- name: Rotate newly-created cron log
+  copy: src=etc/logrotate.d/cron dest=/etc/logrotate.d/ owner=root group=root mode=0644

@@ -7,4 +7,5 @@
     - { role: enable_ssh_over_openvpn, sudo: yes }
     - { role: set_up_sendmail_mta, sudo: yes}
     - { role: enable_apticron, sudo: yes}
+    - { role: clean_up_logging, sudo: yes}
     - { role: cleanup, sudo: yes }
