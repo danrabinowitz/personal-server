@@ -1,7 +1,6 @@
 TODO:
 
-* Clean up logging
-* Fix OpenVPN
+* Clean up logging (Confirm that this is done)
 
 * EC2
 * Elastic IP
