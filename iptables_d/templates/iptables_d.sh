@@ -11,8 +11,8 @@ IPT="/sbin/iptables"
 # TODO: There can be more than one public interface. In a Vagrant VM, or on EC2,
 # for example. How do we want to address this?
 HOST_IP_FOR_PROVISIONING={{ host_ip_for_provisioning.stdout }}
-PROVISIONING_PUBLIC_INT=`ip route get ${HOST_IP_FOR_PROVISIONING}|head -1|cut -d' ' -f 3`
-PUBLIC_INT=`ip route get 8.8.8.8|head -1|cut -d' ' -f 5`
+PROVISIONING_PUBLIC_INT=`ip route get ${HOST_IP_FOR_PROVISIONING}|sed -rn 's/^.+ dev (\w+) .+$/\1/p'`
+PUBLIC_INT=`ip route get 8.8.8.8|sed -rn 's/^.+ dev (\w+) .+$/\1/p'`
 
 # The first time(s) that we run this script, the private interface may not exist
 # yet. That is not a problem. When we need the PRIVATE_INT variable, it will
