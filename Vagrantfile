@@ -7,7 +7,7 @@ ensure_plugin_is_installed('vagrant-aws')
 ensure_plugin_is_installed('vagrant-host-shell')
 
 REQUIRED_VAGRANT_VARS = %w(AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_ELASTIC_IP)
-REQUIRED_ANSIBLE_EXTRA_VARS = %w(OPENVPN_PKI_PASSWORD OPENVPN_NAME OPENVPN_SERVER_IP OPENVPN_SUBNET SENDGRID_USERNAME SENDGRID_PASSWORD)
+REQUIRED_ANSIBLE_EXTRA_VARS = %w(OPENVPN_PKI_PASSWORD OPENVPN_NAME OPENVPN_SUBNET SENDGRID_USERNAME SENDGRID_PASSWORD)
 ANSIBLE_EXTRA_VARS = %w(OPENVPN_NETMASK)
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -20,7 +20,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider :virtualbox do |vb, override|
     override.vm.box = "ubuntu/trusty64"
     override.vm.box_url = "https://atlas.hashicorp.com/ubuntu/boxes/trusty64"
-    override.vm.network "private_network", ip: ENV['OPENVPN_SERVER_IP']
+    override.vm.network "private_network", ip: ENV['VIRTUALBOX_GUEST_IP']
     vb.gui = false
     vb.memory = 896 # This is 7/8 of a gig of ram
   end
@@ -30,6 +30,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     aws.access_key_id = ENV['AWS_ACCESS_KEY_ID']
     aws.secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
 
+    aws.tags["Name"] = "Personal Server"
     aws.region = 'us-west-2'
     # ubuntu AMI
     aws.ami = "ami-35143705"
@@ -70,6 +71,8 @@ sudo ./configure_and_run_vpn.sh #{Shellwords.escape(ENV['OPENVPN_NAME'])}
 You can then ssh into the newly-provisioned machine through the OpenVPN tunnel with:
 ssh -i .vagrant/machines/default/virtualbox/private_key vagrant@#{expected_openvpn_server_ip}
 eof
+
+# TODO: Can we use config.vm.post_up_message
 
   config.vm.provision :host_shell do |host_shell|
     host_shell.inline = "echo #{Shellwords.escape(completion_message1)}"
