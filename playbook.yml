@@ -2,10 +2,10 @@
   roles:
     - { role: iptables_d, sudo: yes }
     - { role: custom_iptables_rules_1, sudo: yes }
-    # - { role: update_apt, sudo: yes} # Needed for apticron
+    - { role: update_apt, sudo: yes} # Needed for apticron
     - { role: danrabinowitz.openvpn_for_access, sudo: yes }
     - { role: enable_ssh_over_openvpn, sudo: yes }
-    # - { role: set_up_sendmail_mta, sudo: yes} # Needed for apticron
-    # - { role: enable_apticron, sudo: yes}
+    - { role: set_up_sendmail_mta, sudo: yes} # Needed for apticron
+    - { role: enable_apticron, sudo: yes}
     - { role: clean_up_logging, sudo: yes}
     # - { role: cleanup, sudo: yes }

@@ -40,7 +40,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     aws.instance_type = 't2.micro'
     aws.elastic_ip = ENV['AWS_ELASTIC_IP']
 
-    aws.monitoring = true
+    aws.monitoring = false
 
     override.vm.box = "dummy"
     override.vm.box_url = "https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box"
@@ -48,15 +48,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     override.ssh.private_key_path = "personal-server.pem"
   end
 
- config.vm.provision :host_shell do |host_shell|
-   host_shell.inline = "ansible-galaxy install -r requirements.yml --force"
- end
+  config.vm.provision :host_shell do |host_shell|
+    host_shell.inline = "ansible-galaxy install -r requirements.yml --force"
+  end
 
   config.vm.provision "ansible" do |ansible|
-      ansible.playbook = "playbook.yml"
+    ansible.playbook = "playbook.yml"
 
-      ansible.extra_vars = {}
-      merge_if_present(ansible.extra_vars, REQUIRED_ANSIBLE_EXTRA_VARS + ANSIBLE_EXTRA_VARS)
+    ansible.extra_vars = {}
+    merge_if_present(ansible.extra_vars, REQUIRED_ANSIBLE_EXTRA_VARS + ANSIBLE_EXTRA_VARS)
   end
 
   expected_openvpn_server_ip = ENV['OPENVPN_SUBNET'].sub(/\.\d{1,3}$/,".1")
