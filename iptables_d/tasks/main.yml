@@ -1,8 +1,16 @@
 ---
 # This creates iptables.d and the main iptables_d shell script.
+# - name: Get host ip used for provisioning
+#   shell: who -m|cut -d '(' -f 2|sed 's/)//'
+#   register: host_ip_for_provisioning
+
 - name: Get host ip used for provisioning
-  shell: who -m|cut -d '(' -f 2|sed 's/)//'
+  shell: echo $SSH_CONNECTION|cut -d' ' -f 1
   register: host_ip_for_provisioning
+
+- name: Get public ip for provisioning
+  shell: echo $SSH_CONNECTION|cut -d' ' -f 3
+  register: public_ip_for_provisioning
 
 - name: "Remove the iptables.d directory, so that when it is created in the next task it is empty"
   command: rm -rf /etc/iptables.d
