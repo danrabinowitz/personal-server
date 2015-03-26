@@ -1,12 +1,9 @@
 TODO:
 
-* Clean up logging (Confirm that this is done)
+# Disable/Remove unused services/packages from the server. Chef?
+* Create djr account?
 
-* .ssh/config
-
-* Create djr account? Update ssh config with an ~/.ssh/config.d/ entry?
-* Fix private key to use my real one. Is it using an insecure one now?
-
+* Should I use my standard ssh keys after initial provisioning?
 * Look into how to make sshd more secure
 * Improve OpenVPN security - MITM attack
 * Improve IPTables security - IPV6
