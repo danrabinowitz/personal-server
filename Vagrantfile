@@ -71,7 +71,9 @@ standard OpenVPN install, executing the following command will move these files 
 sudo ./configure_and_run_vpn.sh #{Shellwords.escape(ENV['OPENVPN_NAME'])}
  
 You can then ssh into the newly-provisioned machine through the OpenVPN tunnel with:
-ssh -i .vagrant/machines/default/virtualbox/private_key vagrant@#{expected_openvpn_server_ip}
+ssh -i .vagrant/machines/default/virtualbox/private_key -o StrictHostKeyChecking=no vagrant@#{expected_openvpn_server_ip}
+for Vagrant, or the following for AWS:
+ssh -o StrictHostKeyChecking=no -i personal-server.pem ubuntu@#{expected_openvpn_server_ip}
 eof
 
 # TODO: Can we use config.vm.post_up_message
