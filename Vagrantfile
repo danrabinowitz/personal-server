@@ -13,6 +13,8 @@ ANSIBLE_EXTRA_VARS = %w(OPENVPN_NETMASK)
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.env.enable
   require_env_values (REQUIRED_ANSIBLE_EXTRA_VARS + REQUIRED_VAGRANT_VARS)
+  PUBLIC_IPS = ENV.to_hash.select{|k,v| ["AWS_ELASTIC_IP", "VIRTUALBOX_GUEST_IP"].include? k}.values
+  raise "Either VIRTUALBOX_GUEST_IP or AWS_ELASTIC_IP must be set" if PUBLIC_IPS.empty?
 
   config.vm.synced_folder '.', '/vagrant', disabled: true
 
@@ -56,7 +58,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "playbook.yml"
 
-    ansible.extra_vars = {}
+    ansible.extra_vars = {possible_public_ips: PUBLIC_IPS.join(' ')}
     merge_if_present(ansible.extra_vars, REQUIRED_ANSIBLE_EXTRA_VARS + ANSIBLE_EXTRA_VARS)
   end
 
