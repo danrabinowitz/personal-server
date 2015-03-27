@@ -48,7 +48,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     override.vm.box = "dummy"
     override.vm.box_url = "https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box"
     override.ssh.username = "ubuntu"
-    override.ssh.private_key_path = "personal-server.pem"
+    override.ssh.private_key_path = ENV['AWS_EC2_SSH_PRIVATE_KEY_PATH']
   end
 
   config.vm.provision :host_shell do |host_shell|
