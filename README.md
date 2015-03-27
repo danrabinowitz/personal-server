@@ -1,6 +1,5 @@
 TODO:
 
-# Disable/Remove unused services/packages from the server. Chef?
 * Create djr account?
 
 * Should I use my standard ssh keys after initial provisioning?

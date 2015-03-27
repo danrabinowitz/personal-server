@@ -1,0 +1,18 @@
+- apt: name={{ item }} state=absent
+  with_items:
+  - fonts-ubuntu-font-family-console
+  - landscape-client
+  - landscape-common
+  - libx11-6
+  - libx11-data
+  - libxcb1
+  - libxext6
+  - libxmuu1
+  - ntfs-3g
+  - ppp
+  - pppconfig
+  - pppoeconf
+  - w3m
+  - xauth
+
+- shell: apt-get autoremove && apt-get clean all && apt-get autoclean all

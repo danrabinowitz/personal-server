@@ -1,6 +1,6 @@
 ---
 - name: Remove cron logs from syslog
-  lineinfile: dest=/etc/rsyslog.d/50-default.conf regexp='^\*\.\*\;auth,authpriv\.none' line='*.*;cron,auth,authpriv.none     -/var/log/syslog'
+  lineinfile: dest=/etc/rsyslog.d/50-default.conf regexp='^\*\.\*\;auth,authpriv\.none' line='*.*;cron,dhclient,auth,authpriv.none     -/var/log/syslog'
 
 - name: Add cron logs from dedicated log file
   lineinfile: dest=/etc/rsyslog.d/50-default.conf regexp='\#cron\.\*' line='cron.*                          /var/log/cron.log'

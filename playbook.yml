@@ -2,6 +2,7 @@
   roles:
     - { role: iptables_d, sudo: yes }
     - { role: custom_iptables_rules_1, sudo: yes }
+    - { role: remove_unneeded_packages, sudo: yes }
     - { role: update_apt, sudo: yes} # Needed for apticron
     - { role: danrabinowitz.openvpn_for_access, sudo: yes }
     - { role: enable_ssh_over_openvpn, sudo: yes }
