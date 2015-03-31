@@ -1,5 +1,11 @@
 TODO:
 
+* Add flag. Unless it is set, do no overwrite OpenVPN config
+
+Do we want to leave open port 80 to allow for updating debian packages? Maybe only to certain IPs?
+
+https://support.ansible.com/hc/en-us/articles/201958037-Reboot-a-server-and-wait-for-it-to-come-back
+
 * Create djr account?
 
 * Should I use my standard ssh keys after initial provisioning?
