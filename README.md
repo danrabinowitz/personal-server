@@ -18,3 +18,6 @@ https://support.ansible.com/hc/en-us/articles/201958037-Reboot-a-server-and-wait
 
 * Try iPhone OpenVPN app
 * Make Dropwall not log traffic. Also do not log ssh attempts
+
+To create on AWS EC2
+vagrant up --provider=aws
